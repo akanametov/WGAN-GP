@@ -156,13 +156,13 @@ class Trainer():
         self.C_criterion=CriticLoss(lambda_).to(device)
         self.results={'G_loss':[], 'C_loss':[]}
         
-    def fit(self, train_gen, epochs=30, repeat=5, device='cuda:0'):
+    def fit(self, dataloader, epochs=30, repeat=5, device='cuda:0'):
         for epoch in range(1, epochs+1):
             G_losses=[]
             C_losses=[]
 
             log = f'::::: Epoch {epoch}/{epochs} :::::'
-            for real, _ in tqdm(train_gen):
+            for real, _ in tqdm(dataloader):
                 real = real.to(device)
                 # CRITIC
                 C_loss=0.
